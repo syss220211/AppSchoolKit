@@ -16,7 +16,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+//        let NavigationFirstViewController = UINavigationController(rootViewController: NavigationFirstViewController())
+        let NavigationFirstViewController = NavigationFirstViewController()
+        NavigationFirstViewController.tabBarItem = UITabBarItem(title: "First", image: UIImage(systemName: "pencil.circle"), tag: 0)
+        
+        let NavigationSecondViewController = UINavigationController(rootViewController: NavigationSecondViewController())
+        NavigationSecondViewController.tabBarItem = UITabBarItem(title: "Second", image: UIImage(systemName: "eraser.fill"), tag: 1)
+        
+        let NavigationThirdViewController = UINavigationController(rootViewController: NavigationThirdViewController())
+        NavigationThirdViewController.tabBarItem = UITabBarItem(title: "Third", image: UIImage(systemName: "heart.fill"), tag: 2)
+        
+        let NavigationFourthViewController = UINavigationController(rootViewController: NavigationFourthViewController())
+        NavigationFourthViewController.tabBarItem = UITabBarItem(title: "Fourth", image: UIImage(systemName: "star.fill"), tag: 3)
+        
+        let NavigationFifthViewController = UINavigationController(rootViewController: NavigationFifthViewController())
+        NavigationFifthViewController.tabBarItem = UITabBarItem(title: "Fifth", image: UIImage(systemName: "text.insert"), tag: 4)
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [NavigationFirstViewController, NavigationSecondViewController, NavigationThirdViewController, NavigationFourthViewController, NavigationFifthViewController]
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D51E323A2A676297003A33FA /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E32392A676297003A33FA /* WeatherViewController.swift */; };
+		D51E323C2A6762A0003A33FA /* WeatherStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51E323B2A6762A0003A33FA /* WeatherStoryboard.storyboard */; };
+		D51E323F2A67A75B003A33FA /* NavigationFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E323E2A67A75B003A33FA /* NavigationFirstViewController.swift */; };
+		D51E32412A67A768003A33FA /* NavigationFirstStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51E32402A67A768003A33FA /* NavigationFirstStoryboard.storyboard */; };
+		D51E32432A67A7D4003A33FA /* NavigationSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E32422A67A7D4003A33FA /* NavigationSecondViewController.swift */; };
+		D51E32452A67B113003A33FA /* NavigationThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E32442A67B113003A33FA /* NavigationThirdViewController.swift */; };
+		D51E32472A67B135003A33FA /* NavigationFourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E32462A67B135003A33FA /* NavigationFourthViewController.swift */; };
+		D51E32492A67B547003A33FA /* NavigationFifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E32482A67B547003A33FA /* NavigationFifthViewController.swift */; };
+		D51E324B2A67B5EF003A33FA /* FifthDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51E324A2A67B5EF003A33FA /* FifthDetailViewController.swift */; };
 		D55C6E352A44119E0032D95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C6E342A44119E0032D95F /* AppDelegate.swift */; };
 		D55C6E372A44119E0032D95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C6E362A44119E0032D95F /* SceneDelegate.swift */; };
 		D55C6E392A44119E0032D95F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C6E382A44119E0032D95F /* ViewController.swift */; };
@@ -21,6 +30,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D51E32392A676297003A33FA /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		D51E323B2A6762A0003A33FA /* WeatherStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeatherStoryboard.storyboard; sourceTree = "<group>"; };
+		D51E323E2A67A75B003A33FA /* NavigationFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFirstViewController.swift; sourceTree = "<group>"; };
+		D51E32402A67A768003A33FA /* NavigationFirstStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NavigationFirstStoryboard.storyboard; sourceTree = "<group>"; };
+		D51E32422A67A7D4003A33FA /* NavigationSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSecondViewController.swift; sourceTree = "<group>"; };
+		D51E32442A67B113003A33FA /* NavigationThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationThirdViewController.swift; sourceTree = "<group>"; };
+		D51E32462A67B135003A33FA /* NavigationFourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFourthViewController.swift; sourceTree = "<group>"; };
+		D51E32482A67B547003A33FA /* NavigationFifthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFifthViewController.swift; sourceTree = "<group>"; };
+		D51E324A2A67B5EF003A33FA /* FifthDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifthDetailViewController.swift; sourceTree = "<group>"; };
 		D55C6E312A44119E0032D95F /* AppSchoolKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppSchoolKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55C6E342A44119E0032D95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D55C6E362A44119E0032D95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +65,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D51E32382A676273003A33FA /* 0719_Weather */ = {
+			isa = PBXGroup;
+			children = (
+				D51E32392A676297003A33FA /* WeatherViewController.swift */,
+				D51E323B2A6762A0003A33FA /* WeatherStoryboard.storyboard */,
+			);
+			path = 0719_Weather;
+			sourceTree = "<group>";
+		};
+		D51E323D2A67A712003A33FA /* 0719_NaviTab */ = {
+			isa = PBXGroup;
+			children = (
+				D51E32402A67A768003A33FA /* NavigationFirstStoryboard.storyboard */,
+				D51E323E2A67A75B003A33FA /* NavigationFirstViewController.swift */,
+				D51E32422A67A7D4003A33FA /* NavigationSecondViewController.swift */,
+				D51E32442A67B113003A33FA /* NavigationThirdViewController.swift */,
+				D51E32462A67B135003A33FA /* NavigationFourthViewController.swift */,
+				D51E32482A67B547003A33FA /* NavigationFifthViewController.swift */,
+				D51E324A2A67B5EF003A33FA /* FifthDetailViewController.swift */,
+			);
+			path = 0719_NaviTab;
+			sourceTree = "<group>";
+		};
 		D55C6E282A44119E0032D95F = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +114,8 @@
 				D55C6E422A4411A00032D95F /* Info.plist */,
 				D55C6E4E2A442EC70032D95F /* 0622_QuizGame */,
 				D58B86AF2A4E95B900727CFD /* 0628_Calculator */,
+				D51E323D2A67A712003A33FA /* 0719_NaviTab */,
+				D51E32382A676273003A33FA /* 0719_Weather */,
 			);
 			path = AppSchoolKit;
 			sourceTree = "<group>";
@@ -183,6 +226,8 @@
 				D55C6E412A4411A00032D95F /* LaunchScreen.storyboard in Resources */,
 				D58B86B12A4E95E800727CFD /* CalculatorStoryboard.storyboard in Resources */,
 				D55C6E3E2A4411A00032D95F /* Assets.xcassets in Resources */,
+				D51E323C2A6762A0003A33FA /* WeatherStoryboard.storyboard in Resources */,
+				D51E32412A67A768003A33FA /* NavigationFirstStoryboard.storyboard in Resources */,
 				D55C6E3C2A44119E0032D95F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,11 +239,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D51E323F2A67A75B003A33FA /* NavigationFirstViewController.swift in Sources */,
 				D55C6E4B2A442B8E0032D95F /* QuizData.swift in Sources */,
+				D51E32492A67B547003A33FA /* NavigationFifthViewController.swift in Sources */,
+				D51E32472A67B135003A33FA /* NavigationFourthViewController.swift in Sources */,
 				D55C6E532A4430250032D95F /* PlayingGameViewController.swift in Sources */,
 				D55C6E4D2A442C030032D95F /* SetQuizData.swift in Sources */,
+				D51E32432A67A7D4003A33FA /* NavigationSecondViewController.swift in Sources */,
+				D51E324B2A67B5EF003A33FA /* FifthDetailViewController.swift in Sources */,
+				D51E32452A67B113003A33FA /* NavigationThirdViewController.swift in Sources */,
 				D55C6E392A44119E0032D95F /* ViewController.swift in Sources */,
 				D55C6E352A44119E0032D95F /* AppDelegate.swift in Sources */,
+				D51E323A2A676297003A33FA /* WeatherViewController.swift in Sources */,
 				D58B86B32A4E95F700727CFD /* CalculatorViewController.swift in Sources */,
 				D55C6E372A44119E0032D95F /* SceneDelegate.swift in Sources */,
 			);
