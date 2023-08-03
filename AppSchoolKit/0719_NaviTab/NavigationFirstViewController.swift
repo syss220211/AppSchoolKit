@@ -63,7 +63,7 @@ class NavigationFirstViewController: UIViewController {
     }
 
     @objc func plusOne() {
-        print("+2 버튼이 눌렸습니다")
+        print("+1 버튼이 눌렸습니다")
         count += 1
         
         label.text = "\(count)"

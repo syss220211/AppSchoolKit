@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
 //        let NavigationFirstViewController = UINavigationController(rootViewController: NavigationFirstViewController())
+        /*
         let NavigationFirstViewController = NavigationFirstViewController()
         NavigationFirstViewController.tabBarItem = UITabBarItem(title: "First", image: UIImage(systemName: "pencil.circle"), tag: 0)
         
@@ -41,6 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+         */
         
     }
 
