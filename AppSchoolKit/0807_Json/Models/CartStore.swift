@@ -8,13 +8,17 @@
 import Foundation
 
 class CartStore {
-    private var products: [Product] = []
+    var carts: [Product] = []
     
     func addProduct(product: Product) {
-        products.append(product)
+        carts.append(product)
     }
     
     func removeProducts(at offsets: IndexSet) {
-        products.remove(atOffsets: offsets)
+        carts.remove(atOffsets: offsets)
+    }
+    
+    func getCartsList() -> [Product] {
+        return carts
     }
 }

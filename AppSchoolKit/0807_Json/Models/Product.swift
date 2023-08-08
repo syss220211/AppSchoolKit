@@ -7,9 +7,12 @@
 
 import UIKit
 
-// 상품 데이터 정의
+protocol ProductDelegate: AnyObject {
+    func addProduct(_ product: Product)
+    func removeProduct(index: IndexSet, _ product: Product)
+}
+
 struct Product: Identifiable, Codable {
-//    var id: UUID = UUID()
     var id: String
     var name: String
     var price: Double
@@ -18,10 +21,6 @@ struct Product: Identifiable, Codable {
     
     var priceString: String {
         price.currencyString
-//        let formatter: NumberFormatter = NumberFormatter()
-//        formatter.numberStyle = .currency
-//        formatter.currencyCode = "KRW"
-//        return formatter.string(from: NSNumber(value: price)) ?? ""
     }
     
     var imageURL: URL {

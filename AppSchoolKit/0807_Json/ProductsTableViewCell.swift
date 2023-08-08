@@ -28,7 +28,7 @@ class ProductsTableViewCell: UITableViewCell {
     let productImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+//        imageView.contentMode = .scaleToFill
         return imageView
     }()
 
@@ -51,11 +51,15 @@ class ProductsTableViewCell: UITableViewCell {
         }
     }
 
-    let button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Add", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .red
+    let BuyButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.setTitle("  Add  ", for: .normal)
+        button.setTitleColor(UIColor(red: 0.7, green: 0.9, blue: 1.0, alpha: 1.0), for: .normal)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.lightGray.cgColor // Border color
+//        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10) // Add space around the title
         button.addTarget(self, action: #selector(goBuyView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -64,6 +68,17 @@ class ProductsTableViewCell: UITableViewCell {
     @objc func goBuyView() {
         print("구입하기 버튼 클릭")
     }
+    
+    let totalStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .horizontal
+        sv.distribution = .fill
+        sv.alignment = .fill
+        sv.spacing = 10
+        sv.backgroundColor = .yellow
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
     
     let stackView: UIStackView = {
         let sv = UIStackView()
@@ -94,37 +109,33 @@ class ProductsTableViewCell: UITableViewCell {
     
     func setupStackView() {
         self.addSubview(productImage)
-//        self.addSubview(button)
+        self.addSubview(BuyButton)
         addSubview(stackView)
+        
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(priceLabel)
     }
-    
+
     func setConstraints() {
         
         // imageView layout
         NSLayoutConstraint.activate([
-            
-            productImage.heightAnchor.constraint(equalToConstant: 150),
-            productImage.widthAnchor.constraint(equalToConstant: 200),
-            productImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            productImage.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
-//            productImage.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-//            productImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            productImage.heightAnchor.constraint(equalToConstant: (self.contentView.bounds.width / 5) * 3),
+            productImage.widthAnchor.constraint(equalToConstant: (self.contentView.bounds.width / 5) * 4),
+            productImage.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            productImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
+        ])
 
+        // stackView layout
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: productImage.leadingAnchor)
         ])
         
         // button layout
-//        NSLayoutConstraint.activate([
-//            button.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
-//            button.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10)
-//        ])
-//
-        // stackView layout
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 5),
-//            stackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10)
+            BuyButton.topAnchor.constraint(equalTo: stackView.topAnchor),
+            BuyButton.trailingAnchor.constraint(equalTo: productImage.trailingAnchor)
         ])
     }
 

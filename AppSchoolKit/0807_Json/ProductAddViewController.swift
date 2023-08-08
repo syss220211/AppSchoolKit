@@ -8,10 +8,11 @@
 import UIKit
 
 class ProductAddViewController: UIViewController {
-
-    private var products = ProductStore()
     
-    var productsArray: [Product] = []
+    var cartProducts: [Product]?
+    
+    private var products = ProductStore()
+    weak var delegate: ProductDelegate?
     
     private var tableView = UITableView()
     
@@ -19,18 +20,28 @@ class ProductAddViewController: UIViewController {
         super.viewDidLoad()
         setupTableViewConstraints()
         setupTableView()
-        setupData()
-        tableView.reloadData()
+        // setupData()
+        fetchAndDisplayProducts()
     }
     
-    func setupData() {
-        products.fetchProducts()
+//    func setupData() {
+//        products.fetchProducts()
+//    }
+    
+    func fetchAndDisplayProducts() {
+        Task {
+            await products.fetchProducts()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
+    
     
     func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self // 화면이동 대리자 설정
-        tableView.rowHeight = 220 //UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(ProductsTableViewCell.self, forCellReuseIdentifier: "ProductCell")
     }
     
@@ -52,11 +63,12 @@ class ProductAddViewController: UIViewController {
 
 extension ProductAddViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.getProductsList().count // products.loadJson(filename: "products").count
+        return products.getProductsList().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ProductsTableViewCell
+        print(products.getProductsList()[indexPath.row])
         cell.nameLabel.text = products.getProductsList()[indexPath.row].name
         cell.priceLabel.text = products.getProductsList()[indexPath.row].priceString
         cell.imageUrl = products.getProductsList()[indexPath.row].imageURLString
@@ -66,8 +78,23 @@ extension ProductAddViewController: UITableViewDataSource {
 
 
 extension ProductAddViewController: UITableViewDelegate {
-//    // 높이 조절
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return tableView.rowHeight
-//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cartVC = ProductCartViewController()
+        let id = products.getProductsList()[indexPath.row].id
+        let name = products.getProductsList()[indexPath.row].name
+        let price = products.getProductsList()[indexPath.row].price
+        let imageURLString = products.getProductsList()[indexPath.row].imageURLString
+        let shopURLString = products.getProductsList()[indexPath.row].shopURLString
+        
+        let newProducts = Product(id: id, name: name, price: price, imageURLString: imageURLString, shopURLString: shopURLString)
+        delegate?.addProduct(newProducts)
+//        cartVC.tableView.reloadData()
+        dismiss(animated: true)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 310
+    }
 }

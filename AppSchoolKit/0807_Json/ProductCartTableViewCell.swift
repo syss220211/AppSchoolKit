@@ -8,17 +8,26 @@
 import UIKit
 
 class ProductCartTableViewCell: UITableViewCell {
-
+    
+    var cartsProduct: Product? {
+        didSet {
+            guard var carts = cartsProduct else { return }
+            name.text = carts.name
+            price.text = carts.priceString
+            imageUrl = carts.imageURLString
+        }
+    }
+    
     let name: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let price: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -34,22 +43,34 @@ class ProductCartTableViewCell: UITableViewCell {
             loadImage()
         }
     }
-    
+
     private func loadImage() {
-//        guard let urlString = self.imageUrl, let url = URL(string: urlString)  else { return }
-        let url = URL(string: "url")
-        productImage.load(url: url!)
+        guard let urlString = self.imageUrl, let url = URL(string: urlString)  else { return }
+
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            guard self.imageUrl == url.absoluteString else { return }
+
+            DispatchQueue.main.async {
+                self.productImage.image = UIImage(data: data)
+            }
+        }
     }
     
-    let button: UIButton = {
+    let websiteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Buy", for: .normal)
-        button.addTarget(self, action: #selector(goBuyView), for: .touchUpInside)
+        button.setTitle("  Buy  ", for: .normal)
+        button.setTitleColor(UIColor(red: 0.7, green: 0.9, blue: 1.0, alpha: 1.0), for: .normal)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.addTarget(self, action: #selector(goWebsitView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    @objc func goBuyView() {
+    @objc func goWebsitView() {
         print("구입하기 버튼 클릭")
     }
     
@@ -79,53 +100,37 @@ class ProductCartTableViewCell: UITableViewCell {
         setConstraints()
         super.updateConstraints()
     }
-    
+        
     func setupStackView() {
         self.addSubview(productImage)
-        self.addSubview(button)
+        self.addSubview(websiteButton)
+        addSubview(stackView)
         
         stackView.addArrangedSubview(name)
         stackView.addArrangedSubview(price)
     }
-    
+
     func setConstraints() {
         
         // imageView layout
         NSLayoutConstraint.activate([
-            productImage.heightAnchor.constraint(equalToConstant: 150),
-            productImage.widthAnchor.constraint(equalToConstant: 150),
-            productImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
-            productImage.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            productImage.heightAnchor.constraint(equalToConstant: (self.contentView.bounds.width / 5) * 3),
+            productImage.widthAnchor.constraint(equalToConstant: (self.contentView.bounds.width / 5) * 4),
+            productImage.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            productImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
+        ])
+
+        // stackView layout
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: productImage.bottomAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: productImage.leadingAnchor)
         ])
         
         // button layout
         NSLayoutConstraint.activate([
-            button.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 20),
-            button.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 30)
-        ])
-        
-        // stackView layout
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: productImage.trailingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: self.productImage.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.productImage.bottomAnchor)
+            websiteButton.topAnchor.constraint(equalTo: stackView.topAnchor),
+            websiteButton.trailingAnchor.constraint(equalTo: productImage.trailingAnchor)
         ])
     }
     
-}
-
-
-extension UIImageView {
-    func load(url: URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
 }
