@@ -21,13 +21,15 @@ class ProductCartViewController: UIViewController {
     }()
     
     @objc func plusButtonTapped() {
-        
         let addProductVC = ProductAddViewController()
         addProductVC.delegate = self
+        
         let array = cartProducts.getCartsList()
         addProductVC.cartProducts = array
+        
         let navController = UINavigationController(rootViewController: addProductVC)
         navController.modalPresentationStyle = .formSheet
+        
         self.present(navController, animated: true)
         
     }
