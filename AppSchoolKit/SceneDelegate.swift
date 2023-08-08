@@ -44,6 +44,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
          */
         
+        //0804 - uikit에서 SwiftUI 사용하기
+//        let navController = UINavigationController(rootViewController: ChartViewController())
+//        
+//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//        window?.windowScene = windowScene
+//        window?.rootViewController = navController
+//        window?.makeKeyAndVisible()
+        
+        // 0807 json 실습 uikit
+        let navController = UINavigationController(rootViewController: ProductCartViewController())
+
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

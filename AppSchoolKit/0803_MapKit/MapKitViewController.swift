@@ -18,7 +18,7 @@ class MapKitViewController: UIViewController {
         
         labelSetup()
         webViewSetup()
-        uikitSetup()
+//        uikitSetup()
     }
     
     func labelSetup() {
