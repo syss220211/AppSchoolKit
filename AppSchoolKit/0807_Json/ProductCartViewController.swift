@@ -29,7 +29,7 @@ class ProductCartViewController: UIViewController {
         
         let navController = UINavigationController(rootViewController: addProductVC)
         navController.modalPresentationStyle = .formSheet
-        
+        addProductVC.title = "상품 목록"
         self.present(navController, animated: true)
         
     }
@@ -41,58 +41,42 @@ class ProductCartViewController: UIViewController {
         setupTableViewConstraints()
         view.backgroundColor = .systemBackground
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        print(#function)
-//        tableView.reloadData()
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        tableView.reloadData()
-//    }
 
     // 네비게이션 바 세팅 코드
     func setupNaviBar() {
         title = "Cart"
-        
+    
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .white
-        
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = .systemBlue
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        // 네비게이션바 오른쪽 상단 버튼 설정
         
-        // Create a UILabel with the text "ADD"
+        // 네비게이션 타이틀 크게 만들기
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // 네비게이션바 오른쪽 상단 버튼 설정
         let label = UILabel()
         label.text = "ADD"
-        label.textColor = .systemBlue // Customize the text color
-        label.font = UIFont.systemFont(ofSize: 15) // Customize the font
-        label.isUserInteractionEnabled = true // Enable user interaction
+        label.textColor = .systemBlue
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.isUserInteractionEnabled = true
         
-        // Create a tap gesture recognizer for the label
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(plusButtonTapped))
         label.addGestureRecognizer(tapGesture)
-        
-        // Create a bar button item with the label as the custom view
         let customButtonItem = UIBarButtonItem(customView: label)
-        
-        // Add the custom button to the navigation bar
         self.navigationItem.rightBarButtonItem = customButtonItem
-        
-        
-        // self.navigationItem.rightBarButtonItem = self.plusButton
     }
     
     func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self // 화면이동 대리자 설정
         tableView.rowHeight = 310
+        // 셀 등록
         tableView.register(ProductCartTableViewCell.self, forCellReuseIdentifier: "CartCell")
-
     }
     
     // 테이블 뷰 오토레이아웃 설정

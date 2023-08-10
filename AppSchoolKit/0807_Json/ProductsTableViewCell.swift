@@ -7,8 +7,25 @@
 
 import UIKit
 
-class ProductsTableViewCell: UITableViewCell {
+//protocol ProductsTableViewCellDelegate: AnyObject {
+//    func goToProductCart()
+//}
 
+class ProductsTableViewCell: UITableViewCell {
+    
+    // button 으로 넘어가기 위한 클로저 사용
+    var addCartButtonTapped: (() -> ())?
+    
+//    var buyButtonTapped: (UITableViewCell) -> Void = { (sender) in }
+//    weak var delegate: ProductsTableViewCellDelegate?
+    
+    // didSet?
+    var productsData: Product? {
+        didSet {
+            configureUIWithData()
+        }
+    }
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
@@ -51,7 +68,7 @@ class ProductsTableViewCell: UITableViewCell {
         }
     }
 
-    let BuyButton: UIButton = {
+    let buyButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setTitle("  Add  ", for: .normal)
         button.setTitleColor(UIColor(red: 0.7, green: 0.9, blue: 1.0, alpha: 1.0), for: .normal)
@@ -59,15 +76,17 @@ class ProductsTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1.0
         button.layer.borderColor = UIColor.lightGray.cgColor // Border color
-//        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10) // Add space around the title
-        button.addTarget(self, action: #selector(goBuyView), for: .touchUpInside)
+//        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10) // 여백주는건데 deprecated 예정임
+//        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    @objc func goBuyView() {
-        print("구입하기 버튼 클릭")
-    }
+//
+//    @objc func goBuyView() {
+//        print("구입하기 버튼 클릭")
+//        buyButtonTapped(self)
+////        delegate?.goToProductCart()
+//    }
     
     let totalStackView: UIStackView = {
         let sv = UIStackView()
@@ -92,8 +111,15 @@ class ProductsTableViewCell: UITableViewCell {
     
     // MARK: - 코드로 cell을 짤 때 사용하는 셀에 대한 셀설정 메소드
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.buyButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         setupStackView() // 생성한 스택뷰를 셀로서 불러오기
+        
+    }
+    
+    @objc func addButtonTapped() {
+        print("버튼이 눌렸음!")
+        addCartButtonTapped?()
     }
     
     required init?(coder: NSCoder) { // super의 필수 생성자 구현
@@ -108,8 +134,8 @@ class ProductsTableViewCell: UITableViewCell {
     }
     
     func setupStackView() {
-        self.addSubview(productImage)
-        self.addSubview(BuyButton)
+        self.contentView.addSubview(productImage)
+        self.contentView.addSubview(buyButton)
         addSubview(stackView)
         
         stackView.addArrangedSubview(nameLabel)
@@ -134,9 +160,16 @@ class ProductsTableViewCell: UITableViewCell {
         
         // button layout
         NSLayoutConstraint.activate([
-            BuyButton.topAnchor.constraint(equalTo: stackView.topAnchor),
-            BuyButton.trailingAnchor.constraint(equalTo: productImage.trailingAnchor)
+            buyButton.topAnchor.constraint(equalTo: stackView.topAnchor),
+            buyButton.trailingAnchor.constraint(equalTo: productImage.trailingAnchor)
         ])
+    }
+    
+    func configureUIWithData() {
+        nameLabel.text = productsData?.name
+        priceLabel.text = productsData?.priceString
+        
+        imageUrl = productsData?.imageURLString
     }
 
 }
