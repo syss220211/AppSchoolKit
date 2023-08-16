@@ -11,7 +11,7 @@ class ProductCartTableViewCell: UITableViewCell {
     
     var cartsProduct: Product? {
         didSet {
-            guard var carts = cartsProduct else { return }
+            guard let carts = cartsProduct else { return }
             name.text = carts.name
             price.text = carts.priceString
             imageUrl = carts.imageURLString

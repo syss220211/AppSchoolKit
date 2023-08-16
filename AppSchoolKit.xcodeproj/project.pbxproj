@@ -40,6 +40,8 @@
 		D5C037F42A80A5CB00EB3A72 /* ProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C037F32A80A5CB00EB3A72 /* ProductStore.swift */; };
 		D5C037F72A80B2B400EB3A72 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C037F62A80B2B400EB3A72 /* ProductsTableViewCell.swift */; };
 		D5C037F82A80BB7E00EB3A72 /* products.geojson in Resources */ = {isa = PBXBuildFile; fileRef = D5C037F52A80A61700EB3A72 /* products.geojson */; };
+		D5C038B72A8627F600EB3A72 /* ProductWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C038B62A8627F600EB3A72 /* ProductWebView.swift */; };
+		D5C038B92A86281600EB3A72 /* ProductWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C038B82A86281600EB3A72 /* ProductWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		D5C037F32A80A5CB00EB3A72 /* ProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
 		D5C037F52A80A61700EB3A72 /* products.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = products.geojson; sourceTree = "<group>"; };
 		D5C037F62A80B2B400EB3A72 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
+		D5C038B62A8627F600EB3A72 /* ProductWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductWebView.swift; sourceTree = "<group>"; };
+		D5C038B82A86281600EB3A72 /* ProductWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,11 +219,8 @@
 		D5C037E52A808F5E00EB3A72 /* 0807_Json */ = {
 			isa = PBXGroup;
 			children = (
-				D5C037E82A808FB100EB3A72 /* JsonStoryboard.storyboard */,
-				D5C037E62A808FAA00EB3A72 /* ProductCartViewController.swift */,
-				D5C037EC2A8090FB00EB3A72 /* ProductCartTableViewCell.swift */,
-				D5C037EA2A80903700EB3A72 /* ProductAddViewController.swift */,
-				D5C037F62A80B2B400EB3A72 /* ProductsTableViewCell.swift */,
+				D5C038B52A84DD7500EB3A72 /* Controller */,
+				D5C038B42A84DD6D00EB3A72 /* View */,
 				D5C037F22A80A5AE00EB3A72 /* Models */,
 			);
 			path = 0807_Json;
@@ -234,6 +235,27 @@
 				D5C037F52A80A61700EB3A72 /* products.geojson */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D5C038B42A84DD6D00EB3A72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D5C037E82A808FB100EB3A72 /* JsonStoryboard.storyboard */,
+				D5C037EC2A8090FB00EB3A72 /* ProductCartTableViewCell.swift */,
+				D5C037F62A80B2B400EB3A72 /* ProductsTableViewCell.swift */,
+				D5C038B62A8627F600EB3A72 /* ProductWebView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D5C038B52A84DD7500EB3A72 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D5C037E62A808FAA00EB3A72 /* ProductCartViewController.swift */,
+				D5C037EA2A80903700EB3A72 /* ProductAddViewController.swift */,
+				D5C038B82A86281600EB3A72 /* ProductWebViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D51E323F2A67A75B003A33FA /* NavigationFirstViewController.swift in Sources */,
+				D5C038B72A8627F600EB3A72 /* ProductWebView.swift in Sources */,
 				D5C037F72A80B2B400EB3A72 /* ProductsTableViewCell.swift in Sources */,
 				D55C6E4B2A442B8E0032D95F /* QuizData.swift in Sources */,
 				D5C037ED2A8090FB00EB3A72 /* ProductCartTableViewCell.swift in Sources */,
@@ -322,6 +345,7 @@
 				D51E32472A67B135003A33FA /* NavigationFourthViewController.swift in Sources */,
 				D5C037F42A80A5CB00EB3A72 /* ProductStore.swift in Sources */,
 				D5C037EB2A80903700EB3A72 /* ProductAddViewController.swift in Sources */,
+				D5C038B92A86281600EB3A72 /* ProductWebViewController.swift in Sources */,
 				D5C037F12A80952500EB3A72 /* CartStore.swift in Sources */,
 				D55C6E532A4430250032D95F /* PlayingGameViewController.swift in Sources */,
 				D52250C12A7C8B810071B631 /* ChartViewController.swift in Sources */,

@@ -44,18 +44,22 @@ class ProductAddViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+    
+        
+        let closeButton = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(closeButtonTapped))
+        self.navigationItem.rightBarButtonItem = closeButton
         
         // 네비게이션바 오른쪽 상단 버튼 설정
-        let label = UILabel()
-        label.text = "닫기"
-        label.textColor = .systemBlue
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.isUserInteractionEnabled = true
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
-        label.addGestureRecognizer(tapGesture)
-        let customButtonItem = UIBarButtonItem(customView: label)
-        self.navigationItem.rightBarButtonItem = customButtonItem
+//        let label = UILabel()
+//        label.text = "닫기"
+//        label.textColor = .systemBlue
+//        label.font = UIFont.systemFont(ofSize: 15)
+//        label.isUserInteractionEnabled = true
+//
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeButtonTapped))
+//        label.addGestureRecognizer(tapGesture)
+//        let customButtonItem = UIBarButtonItem(customView: label)
+//        self.navigationItem.rightBarButtonItem = customButtonItem
     }
     
     @objc func closeButtonTapped() {
@@ -100,7 +104,6 @@ extension ProductAddViewController: UITableViewDataSource {
 //        cell.imageUrl = productData.imageURLString
         
         cell.addCartButtonTapped = { [unowned self] in
-            print("tapppepedkasjd!!!")
             let id = data.id
             let name = data.name
             let price = data.price
@@ -117,7 +120,9 @@ extension ProductAddViewController: UITableViewDataSource {
 
 
 extension ProductAddViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("사이트로 이동하는 버튼이 눌렸음!!")
+    }
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cartVC = ProductCartViewController()
 //        let id = products.getProductsList()[indexPath.row].id

@@ -9,6 +9,10 @@ import UIKit
 
 class ProductCartViewController: UIViewController {
 
+    private let addProductVC = ProductAddViewController()
+    private let cartView = ProductCartTableViewCell()
+    private let websiteView =  ProductWebViewController()
+    
     let tableView = UITableView()
     var cartProducts = CartStore()
 //    var carts = CartStore().getCartsList()
@@ -21,7 +25,6 @@ class ProductCartViewController: UIViewController {
     }()
     
     @objc func plusButtonTapped() {
-        let addProductVC = ProductAddViewController()
         addProductVC.delegate = self
         
         let array = cartProducts.getCartsList()
@@ -40,8 +43,19 @@ class ProductCartViewController: UIViewController {
         setupTableView()
         setupTableViewConstraints()
         view.backgroundColor = .systemBackground
+        setupBuyButton()
     }
-
+    
+    // Buy 버튼 테스트 1
+    func setupBuyButton() {
+        cartView.websiteButton.addTarget(self, action: #selector(buyButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func buyButtonTapped() {
+        print("구매 버튼이 눌렸음!!")
+    }
+    
+    
     // 네비게이션 바 세팅 코드
     func setupNaviBar() {
         title = "Cart"
@@ -115,6 +129,30 @@ extension ProductCartViewController: UITableViewDataSource {
 }
 
 extension ProductCartViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("사이트로 이동하는 버튼이 눌렸음!!")
+        let testURL = cartProducts.getCartsList()[indexPath.row].shopURLString
+        
+        if let url = URL(string: testURL) {
+            let request = URLRequest(url: url)
+            websiteView.webView.productSite.load(request)
+        }
+        
+        let navController = UINavigationController(rootViewController: websiteView)
+        navController.modalPresentationStyle = .formSheet
+        websiteView.title = "\(cartProducts.getCartsList()[indexPath.row].name)"
+
+        let closeButton = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(closeButtonTapped))
+        websiteView.navigationItem.rightBarButtonItem = closeButton
+        
+        self.present(navController, animated: true)
+//        navigationController?.pushViewController(websiteView, animated: true)
+    }
+
+    @objc func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     
 }
 

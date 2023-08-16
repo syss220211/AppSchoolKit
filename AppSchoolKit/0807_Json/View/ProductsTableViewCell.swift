@@ -7,19 +7,11 @@
 
 import UIKit
 
-//protocol ProductsTableViewCellDelegate: AnyObject {
-//    func goToProductCart()
-//}
-
 class ProductsTableViewCell: UITableViewCell {
     
     // button 으로 넘어가기 위한 클로저 사용
     var addCartButtonTapped: (() -> ())?
-    
-//    var buyButtonTapped: (UITableViewCell) -> Void = { (sender) in }
-//    weak var delegate: ProductsTableViewCellDelegate?
-    
-    // didSet?
+
     var productsData: Product? {
         didSet {
             configureUIWithData()
@@ -45,7 +37,6 @@ class ProductsTableViewCell: UITableViewCell {
     let productImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.contentMode = .scaleToFill
         return imageView
     }()
 
@@ -77,16 +68,9 @@ class ProductsTableViewCell: UITableViewCell {
         button.layer.borderWidth = 1.0
         button.layer.borderColor = UIColor.lightGray.cgColor // Border color
 //        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10) // 여백주는건데 deprecated 예정임
-//        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-//
-//    @objc func goBuyView() {
-//        print("구입하기 버튼 클릭")
-//        buyButtonTapped(self)
-////        delegate?.goToProductCart()
-//    }
     
     let totalStackView: UIStackView = {
         let sv = UIStackView()
@@ -168,7 +152,6 @@ class ProductsTableViewCell: UITableViewCell {
     func configureUIWithData() {
         nameLabel.text = productsData?.name
         priceLabel.text = productsData?.priceString
-        
         imageUrl = productsData?.imageURLString
     }
 
