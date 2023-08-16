@@ -141,12 +141,3 @@ extension ProductAddViewController: UITableViewDelegate {
         return 310
     }
 }
-
-//extension ProductAddViewController: ProductsTableViewCellDelegate {
-//    func goToProductCart() {
-//        dismiss(animated: true)
-////        let cartVC = ProductCartViewController()
-////        // Configure cartVC if needed
-////        present(cartVC, animated: true, completion: nil)
-//    }
-//}

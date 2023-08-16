@@ -102,7 +102,7 @@ class ProductsTableViewCell: UITableViewCell {
     }
     
     @objc func addButtonTapped() {
-        print("버튼이 눌렸음!")
+        print("add 버튼이 눌렸음!")
         addCartButtonTapped?()
     }
     

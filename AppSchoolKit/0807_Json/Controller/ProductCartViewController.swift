@@ -120,56 +120,71 @@ extension ProductCartViewController: UITableViewDataSource {
 //        cell.name.text = cellItem.name
 //        cell.price.text = cellItem.priceString
 //        cell.imageUrl = cellItem.imageURLString
-//
         cell.cartsProduct = cartProducts.getCartsList()[indexPath.row]
+        cell.reportButtonAction = { [unowned self] in
+            print("사이트로 이동하는 버튼이 눌렸음!!")
+            let testURL = cartProducts.getCartsList()[indexPath.row].shopURLString
+            
+            if let url = URL(string: testURL) {
+                let request = URLRequest(url: url)
+                websiteView.webView.productSite.load(request)
+            }
+            
+            let navController = UINavigationController(rootViewController: websiteView)
+            navController.modalPresentationStyle = .formSheet
+            websiteView.title = "\(cartProducts.getCartsList()[indexPath.row].name)"
+
+            let closeButton = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(closeButtonTapped))
+            websiteView.navigationItem.rightBarButtonItem = closeButton
+            
+            self.present(navController, animated: true)
+        }
         return cell
+    }
+    
+    
+    @objc func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     
 }
 
 extension ProductCartViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("사이트로 이동하는 버튼이 눌렸음!!")
-        let testURL = cartProducts.getCartsList()[indexPath.row].shopURLString
-        
-        if let url = URL(string: testURL) {
-            let request = URLRequest(url: url)
-            websiteView.webView.productSite.load(request)
-        }
-        
-        let navController = UINavigationController(rootViewController: websiteView)
-        navController.modalPresentationStyle = .formSheet
-        websiteView.title = "\(cartProducts.getCartsList()[indexPath.row].name)"
-
-        let closeButton = UIBarButtonItem(title: "닫기", style: .plain, target: self, action: #selector(closeButtonTapped))
-        websiteView.navigationItem.rightBarButtonItem = closeButton
-        
-        self.present(navController, animated: true)
-//        navigationController?.pushViewController(websiteView, animated: true)
-    }
-
-    @objc func closeButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
-    }
-
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //
+    ////        navigationController?.pushViewController(websiteView, animated: true)
+    //    }
+    //
+    //    @objc func closeButtonTapped() {
+    //        self.dismiss(animated: true, completion: nil)
+    //    }
     
+    // swipeAction 추가하기??
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
+            // Perform the delete action here
+            self.cartProducts.removeProducts(index: indexPath)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            completionHandler(true)
+            
+        }
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
 }
 
 
 extension ProductCartViewController: ProductDelegate {
+    func removeProduct(index: IndexPath) {
+        cartProducts.removeProducts(index: index)
+        tableView.reloadData()
+    }
+    
     func addProduct(_ product: Product) {
         cartProducts.addProduct(product: product)
         tableView.reloadData()
     }
-    
-    func removeProduct(index: IndexSet, _ product: Product) {
-        cartProducts.removeProducts(at: index)
-        tableView.reloadData()
-    }
-    
-    
-    
-    
-    
+
 }

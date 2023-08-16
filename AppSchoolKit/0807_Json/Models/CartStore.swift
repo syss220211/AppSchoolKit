@@ -14,8 +14,8 @@ class CartStore {
         carts.append(product)
     }
     
-    func removeProducts(at offsets: IndexSet) {
-        carts.remove(atOffsets: offsets)
+    func removeProducts(index: IndexPath) {
+        carts.remove(at: index.row)
     }
     
     func getCartsList() -> [Product] {

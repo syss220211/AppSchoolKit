@@ -9,6 +9,10 @@ import UIKit
 
 class ProductCartTableViewCell: UITableViewCell {
     
+    // 버튼 액션 클로저
+    var reportButtonAction: (() -> ())?
+    
+    
     var cartsProduct: Product? {
         didSet {
             guard let carts = cartsProduct else { return }
@@ -60,20 +64,14 @@ class ProductCartTableViewCell: UITableViewCell {
     let websiteButton: UIButton = {
         let button = UIButton()
         button.setTitle("  Buy  ", for: .normal)
-        button.setTitleColor(UIColor(red: 0.7, green: 0.9, blue: 1.0, alpha: 1.0), for: .normal)
-        button.backgroundColor = .gray
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
         button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1.0
-        button.layer.borderColor = UIColor.lightGray.cgColor
-        button.addTarget(self, action: #selector(goWebsitView), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(goWebsitView), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    @objc func goWebsitView() {
-        print("구입하기 버튼 클릭")
-    }
-    
+
     let stackView: UIStackView = {
         let sv = UIStackView()
         sv.axis = .vertical
@@ -88,6 +86,14 @@ class ProductCartTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setupStackView() // 생성한 스택뷰를 셀로서 불러오기
+        
+        // 셀에 버튼 넣어주기
+        self.websiteButton.addTarget(self, action: #selector(reportButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func reportButtonTapped() {
+        print("구입하기 버튼 Tapped!!")
+        reportButtonAction?()
     }
     
     required init?(coder: NSCoder) { // super의 필수 생성자 구현
@@ -102,8 +108,8 @@ class ProductCartTableViewCell: UITableViewCell {
     }
         
     func setupStackView() {
-        self.addSubview(productImage)
-        self.addSubview(websiteButton)
+        self.contentView.addSubview(productImage)
+        self.contentView.addSubview(websiteButton)
         addSubview(stackView)
         
         stackView.addArrangedSubview(name)

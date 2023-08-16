@@ -9,7 +9,7 @@ import UIKit
 
 protocol ProductDelegate: AnyObject {
     func addProduct(_ product: Product)
-    func removeProduct(index: IndexSet, _ product: Product)
+    func removeProduct(index: IndexPath)
 }
 
 struct Product: Identifiable, Codable {
